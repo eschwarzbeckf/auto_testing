@@ -1,0 +1,21 @@
+{
+  "name": "qa-agent-backend",
+  "version": "1.0.0",
+  "description": "AI QA Agent using Playwright and Google Gemini",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "playwright": "^1.42.0",
+    "zod": "^3.22.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

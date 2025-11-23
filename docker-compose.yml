@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - FIGMA_ACCESS_TOKEN=${FIGMA_ACCESS_TOKEN}
+      - CI=true
+    ports:
+      - "3000:3000"
+    volumes:
+      # Montar código para desarrollo (hot-reload manual con nodemon si se desea)
+      - ./backend:/app
+      # Evitar sobrescribir node_modules del contenedor
+      - /app/node_modules
+    networks:
+      - qa-net
+
+  # 2. La Interfaz (React)
+  frontend:
+    build: ./frontend
+    environment:
+      # URL del backend para que React sepa a dónde llamar
+      - REACT_APP_API_URL=http://localhost:3000
+    ports:
+      - "8080:80" # Accede en tu navegador por localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - qa-net
+
+networks:
+  qa-net:
+    driver: bridge
